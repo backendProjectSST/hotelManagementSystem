@@ -9,12 +9,11 @@ import lombok.Data;
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long room_id;
+    private Long roomId;
     private RoomStatus roomStatus;
     private RoomType roomType;
     private double price;
-
-    @ManyToOne
     @Nullable
+    @OneToOne
     private Customer customer;
 }
