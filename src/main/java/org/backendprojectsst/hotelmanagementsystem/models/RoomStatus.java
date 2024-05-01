@@ -1,6 +1,6 @@
 package org.backendprojectsst.hotelmanagementsystem.models;
 
-public enum Room_status {
+public enum RoomStatus {
     VACANT,
     OCCUPIED
 }

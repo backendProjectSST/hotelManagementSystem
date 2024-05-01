@@ -1,6 +1,6 @@
 package org.backendprojectsst.hotelmanagementsystem.models;
 
-public enum Room_type {
+public enum RoomType {
     DELUXE,
     SUPER_DELUXE,
     DELUXE_DOUBLE_SHARING

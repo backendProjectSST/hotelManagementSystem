@@ -3,11 +3,10 @@ package org.backendprojectsst.hotelmanagementsystem.models;
 import jakarta.persistence.*;
 
 import java.util.*;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
+import lombok.Data;
+
+@Data
 @Entity
 public class Customer {
     @Id

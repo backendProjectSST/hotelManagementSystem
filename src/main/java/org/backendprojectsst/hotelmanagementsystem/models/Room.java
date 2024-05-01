@@ -1,18 +1,18 @@
 package org.backendprojectsst.hotelmanagementsystem.models;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 @Entity
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long room_id;
-    private Room_status roomStatus;
-    private Room_type roomType;
+    private RoomStatus roomStatus;
+    private RoomType roomType;
     private double price;
 
     @ManyToOne
