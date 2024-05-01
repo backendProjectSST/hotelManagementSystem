@@ -1,4 +1,4 @@
 package org.backendprojectsst.hotelmanagementsystem.repositories;
 
-public class CustomerRepository {
+public interface CustomerRepository {
 }
