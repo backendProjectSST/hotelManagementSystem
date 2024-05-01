@@ -18,7 +18,7 @@ public class Customer {
     private String email;
     private boolean isCheckedIn;
 
-    @ManyToOne
+    @OneToOne
     private Room room;
 
     @ManyToOne

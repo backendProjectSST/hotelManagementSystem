@@ -4,6 +4,8 @@ import org.backendprojectsst.hotelmanagementsystem.models.Customer;
 import org.backendprojectsst.hotelmanagementsystem.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
@@ -11,6 +13,34 @@ public class CustomerServiceImpl implements CustomerService {
 
     public CustomerServiceImpl(CustomerRepository customerRepository){
         this.customerRepository = customerRepository;
+    }
+
+    public Customer getCustomerById(Long customerId) {
+        return customerRepository.findById(customerId).orElse(null);
+    }
+
+    public Customer getCustomerByEmail(String email) {
+        return customerRepository.findByEmail(email);
+    }
+
+    public Customer getCustomerByContact(String contact) {
+        return customerRepository.findByContact(contact);
+    }
+
+    public Customer getCustomerByName(String name) {
+        return customerRepository.findByName(name);
+    }
+
+    public Customer getCustomerByRoomId(Long roomId) {
+        return customerRepository.findByRoom_id(roomId);
+    }
+
+    public Customer getCustomerByBookingId(Long bookingId) {
+        return customerRepository.findByBookingDetails_booking_id(bookingId);
+    }
+
+    public List<Customer> getAllCustomers() {
+        return customerRepository.findAll();
     }
 
     public Customer createCustomer(Customer customer) {
@@ -22,7 +52,6 @@ public class CustomerServiceImpl implements CustomerService {
         if (existingCustomer != null) {
             existingCustomer.setName(updatedCustomer.getName());
             existingCustomer.setEmail(updatedCustomer.getEmail());
-            // Update other fields as needed
             return customerRepository.save(existingCustomer);
         }
         return null;
