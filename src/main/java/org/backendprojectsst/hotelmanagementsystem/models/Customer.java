@@ -16,6 +16,7 @@ public class Customer {
     private String name;
     private String contact;
     private String email;
+    private boolean isCheckedIn;
 
     @OneToOne
     private Room room;
