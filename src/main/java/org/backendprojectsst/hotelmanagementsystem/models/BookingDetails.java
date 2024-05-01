@@ -20,5 +20,6 @@ public class BookingDetails {
     private LocalDate checkInTime;
     private LocalDate checkOutTime;
     private PaymentStatus paymentStatus;
+    private BookingStatus bookingStatus;
 
 }

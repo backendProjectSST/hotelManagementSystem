@@ -2,20 +2,16 @@ package org.backendprojectsst.hotelmanagementsystem.services.Customer;
 
 import org.backendprojectsst.hotelmanagementsystem.models.Customer;
 import org.backendprojectsst.hotelmanagementsystem.repositories.CustomerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class CustomerServiceImpl {
+public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
 
     public CustomerServiceImpl(CustomerRepository customerRepository){
         this.customerRepository = customerRepository;
     }
-
 
     public Customer createCustomer(Customer customer) {
         return customerRepository.save(customer);
@@ -49,37 +45,4 @@ public class CustomerServiceImpl {
         }
         return null;
     }
-
-    public void cancelBooking(Long customerId, Long bookingId) {
-        Customer customer = customerRepository.findById(customerId).orElse(null);
-        if (customer != null) {
-            List<Booking> bookings = customer.getBookings();
-            for (Booking booking : bookings) {
-                if (booking.getId().equals(bookingId)) {
-                    // Update booking status to cancelled
-                    booking.setStatus("Cancelled");
-                    // Perform other actions if needed
-                    customerRepository.save(customer);
-                    return;
-                }
-            }
-        }
-    }
-
-    public List<Booking> getBookingHistory(Long customerId) {
-        Customer customer = customerRepository.findById(customerId).orElse(null);
-        if (customer != null) {
-            return customer.getBookings();
-        }
-        return null;
-    }
-
-    public Room getCustomerRoomDetails(Long customerId) {
-        Customer customer = customerRepository.findById(customerId).orElse(null);
-        if (customer != null && customer.isCheckedIn()) {
-            return customer.getRoom();
-        }
-        return null;
-    }
-}
 }
