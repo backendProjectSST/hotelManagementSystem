@@ -43,6 +43,12 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    public List<Room> getRoomsbyType(RoomType type)
+    {
+        return roomRepository.findAllByRoomType(type).orElse(null);
+    }
+
+    @Override
     public Room addRoom(Room room) {
         if (Objects.isNull(room)) return null;
         return roomRepository.save(room);
