@@ -11,15 +11,17 @@ import lombok.Data;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long customer_id;
+    private Long customerId;
 
     private String name;
     private String contact;
     private String email;
 
-    @ManyToOne
+    @OneToOne
     private Room room;
 
+
     @ManyToOne
+    @JoinColumn
     BookingDetails bookingDetails;
 }

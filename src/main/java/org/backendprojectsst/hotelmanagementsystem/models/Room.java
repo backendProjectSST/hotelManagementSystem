@@ -10,11 +10,11 @@ import lombok.Setter;
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long room_id;
+    private Long roomId;
     private RoomStatus roomStatus;
     private RoomType roomType;
     private double price;
 
-    @ManyToOne
+    @OneToOne
     private Customer customer;
 }
