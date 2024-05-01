@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-@Service
 
 public interface BookingDetailsService {
     public void addBookingDetails(BookingDetails bookingDetails);

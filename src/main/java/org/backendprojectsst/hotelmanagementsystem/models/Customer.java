@@ -4,10 +4,14 @@ import jakarta.persistence.*;
 
 import java.util.*;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,11 +20,10 @@ public class Customer {
     private String name;
     private String contact;
     private String email;
-    private boolean isCheckedIn;
+    private Boolean isCheckedIn = false;
 
     @OneToOne
     private Room room;
-
 
     @ManyToOne
     @JoinColumn

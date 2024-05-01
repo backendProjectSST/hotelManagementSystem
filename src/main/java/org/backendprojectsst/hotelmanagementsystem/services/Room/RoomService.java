@@ -18,5 +18,6 @@ public interface RoomService
     Room updateRoomPrice(Room room, double price);
     Room updateRoomType(Room room, String type);
     void deleteRoom(long id);
+    boolean isRoom(Long id);
 
 }

@@ -32,11 +32,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     public Customer getCustomerByRoomId(Long roomId) {
-        return customerRepository.findByRoom_id(roomId);
+        return customerRepository.findCustomerByRoom_RoomId(roomId);
     }
 
     public Customer getCustomerByBookingId(Long bookingId) {
-        return customerRepository.findByBookingDetails_booking_id(bookingId);
+        return customerRepository.findCustomerByBookingDetails_BookingId(bookingId);
     }
 
     public List<Customer> getAllCustomers() {
@@ -59,8 +59,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     public Customer checkIn(Long customerId) {
         Customer customer = customerRepository.findById(customerId).orElse(null);
-        if (customer != null && !customer.isCheckedIn()) {
-            customer.setCheckedIn(true);
+        if (customer != null && !customer.getIsCheckedIn()) {
+            customer.setIsCheckedIn(true);
             return customerRepository.save(customer);
         }
         return null;
@@ -68,8 +68,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     public Customer checkOut(Long customerId) {
         Customer customer = customerRepository.findById(customerId).orElse(null);
-        if (customer != null && customer.isCheckedIn()) {
-            customer.setCheckedIn(false);
+        if (customer != null && customer.getIsCheckedIn()) {
+            customer.setIsCheckedIn(false);
             return customerRepository.save(customer);
         }
         return null;

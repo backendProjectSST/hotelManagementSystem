@@ -24,7 +24,6 @@ public class BookingDetails {
     private LocalTime checkInTime;
     private LocalTime checkOutTime;
     private PaymentStatus paymentStatus;
-    private BookingStatus bookingStatus;
     private PaymentMethod paymentMethod;
     private LocalDate paymentDate;
 }

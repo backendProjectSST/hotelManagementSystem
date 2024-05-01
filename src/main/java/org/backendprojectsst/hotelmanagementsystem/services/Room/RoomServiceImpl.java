@@ -49,42 +49,50 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Room addRoom(Room room) {
+    public Room addRoom(Room room)
+    {
         if (Objects.isNull(room)) return null;
-        return roomRepository.save(room);
+        roomRepository.save(room);
+        return room;
     }
 
     @Override
     public Room updateRoomOccupancy(Room room, Long customerId) {
-        Room existingRoom = roomRepository.findById(room.getRoom_id()).orElse(null);
+        Room existingRoom = roomRepository.findById(room.getRoomId()).orElse(null);
         if(existingRoom == null) return null;
         Customer customer = customerRepository.findById(customerId).orElse(null);
         if(customer == null) return null;
         existingRoom.setCustomer(customer);
         roomRepository.save(existingRoom);
-        return roomRepository.findById(room.getRoom_id()).orElse(null);
+        return roomRepository.findById(room.getRoomId()).orElse(null);
     }
 
     @Override
     public Room updateRoomType(Room room, String type) {
-        Room existingRoom = roomRepository.findById(room.getRoom_id()).orElse(null);
+        Room existingRoom = roomRepository.findById(room.getRoomId()).orElse(null);
         if (existingRoom == null) return null;
         existingRoom.setRoomType(RoomType.valueOf(type));
         roomRepository.save(existingRoom);
-        return roomRepository.findById(room.getRoom_id()).orElse(null);
+        return roomRepository.findById(room.getRoomId()).orElse(null);
     }
 
     @Override
     public Room updateRoomPrice(Room room, double price) {
-        Room existingRoom = roomRepository.findById(room.getRoom_id()).orElse(null);
+        Room existingRoom = roomRepository.findById(room.getRoomId()).orElse(null);
         if (existingRoom == null) return null;
         existingRoom.setPrice(price);
         roomRepository.save(existingRoom);
-        return roomRepository.findById(room.getRoom_id()).orElse(null);
+        return roomRepository.findById(room.getRoomId()).orElse(null);
     }
 
     @Override
     public void deleteRoom(long id) {
         roomRepository.deleteById(id);
     }
+
+    @Override
+    public boolean isRoom(Long id) {
+        return roomRepository.existsById(id);
+    }
+
 }
