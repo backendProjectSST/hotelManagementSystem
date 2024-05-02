@@ -1,6 +1,9 @@
 package org.backendprojectsst.hotelmanagementsystem.controllers;
 
+import org.backendprojectsst.hotelmanagementsystem.models.BookingDetails;
 import org.backendprojectsst.hotelmanagementsystem.models.Customer;
+import org.backendprojectsst.hotelmanagementsystem.models.Room;
+import org.backendprojectsst.hotelmanagementsystem.services.Customer.CustomerService;
 import org.backendprojectsst.hotelmanagementsystem.services.Customer.CustomerServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,10 +15,10 @@ import java.util.List;
 @RequestMapping("/customer")
 public class CustomerController {
 
-    private final CustomerServiceImpl customerService;
+    private final CustomerService customerService;
 
 
-    public CustomerController(CustomerServiceImpl customerService) {
+    public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
 
@@ -95,6 +98,16 @@ public class CustomerController {
         Customer updated = customerService.updateCustomer(customerId, updatedCustomer);
         if (updated != null) {
             return new ResponseEntity<>(updated, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/{customerId}")
+    public ResponseEntity<Customer> deleteCustomer(@PathVariable Long customerId) {
+        Customer deletedCustomer = customerService.deleteCustomer(customerId);
+        if (deletedCustomer != null) {
+            return new ResponseEntity<>(deletedCustomer, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

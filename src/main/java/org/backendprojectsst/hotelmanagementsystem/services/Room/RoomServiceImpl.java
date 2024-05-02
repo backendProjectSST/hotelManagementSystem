@@ -1,9 +1,7 @@
 package org.backendprojectsst.hotelmanagementsystem.services.Room;
 
-import org.backendprojectsst.hotelmanagementsystem.models.Customer;
-import org.backendprojectsst.hotelmanagementsystem.models.Room;
-import org.backendprojectsst.hotelmanagementsystem.models.RoomStatus;
-import org.backendprojectsst.hotelmanagementsystem.models.RoomType;
+import org.backendprojectsst.hotelmanagementsystem.models.*;
+import org.backendprojectsst.hotelmanagementsystem.repositories.BookingDetailsRepository;
 import org.backendprojectsst.hotelmanagementsystem.repositories.CustomerRepository;
 import org.backendprojectsst.hotelmanagementsystem.repositories.RoomRepository;
 import org.springframework.stereotype.Service;
@@ -15,9 +13,11 @@ import java.util.Objects;
 public class RoomServiceImpl implements RoomService {
     private final RoomRepository roomRepository;
     private final CustomerRepository customerRepository;
-    public RoomServiceImpl(RoomRepository roomRepository, CustomerRepository customerRepository) {
+    private final BookingDetailsRepository bookingDetailsRepository;
+    public RoomServiceImpl(RoomRepository roomRepository, CustomerRepository customerRepository, BookingDetailsRepository bookingDetailsRepository) {
         this.roomRepository = roomRepository;
         this.customerRepository = customerRepository;
+        this.bookingDetailsRepository = bookingDetailsRepository;
     }
 
     @Override
@@ -52,6 +52,8 @@ public class RoomServiceImpl implements RoomService {
     public Room addRoom(Room room)
     {
         if (Objects.isNull(room)) return null;
+        Customer customer = room.getCustomer();
+        if(customer != null) customerRepository.save(customer);
         roomRepository.save(room);
         return room;
     }
@@ -90,8 +92,7 @@ public class RoomServiceImpl implements RoomService {
         roomRepository.deleteById(id);
     }
 
-    @Override
-    public boolean isRoom(Long id) {
+    public boolean isRoom(long id) {
         return roomRepository.existsById(id);
     }
 

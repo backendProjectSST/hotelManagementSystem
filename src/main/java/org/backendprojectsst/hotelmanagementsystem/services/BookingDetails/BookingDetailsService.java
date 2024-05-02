@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface BookingDetailsService {
     public void addBookingDetails(BookingDetails bookingDetails);
-    public void updateBookingDetails(BookingDetails bookingDetails);
+    public void updateBookingDetails(long id, BookingDetails bookingDetails);
     public void deleteBookingDetails(long bookingDetailsId);
     public BookingDetails getBookingDetailsByBookingId(long bookingDetailsId);
     public List<BookingDetails> getAllBookingDetails();
