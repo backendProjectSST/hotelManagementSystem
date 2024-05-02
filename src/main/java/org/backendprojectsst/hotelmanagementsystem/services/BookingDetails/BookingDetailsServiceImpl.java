@@ -34,7 +34,13 @@ public class BookingDetailsServiceImpl implements BookingDetailsService{
         bookingDetailsRepository.save(bookingDetails);
     }
 
-    public void updateBookingDetails(BookingDetails bookingDetails) {
+    public void updateBookingDetails(long id, BookingDetails bookingDetails) {
+        BookingDetails bookingDetails1 = bookingDetailsRepository.findById(id).orElse(null);
+        if (bookingDetails1 == null) return;
+        Room room = bookingDetails.getRoom();
+        Customer customer = bookingDetails.getCustomer();
+        customerRepository.save(customer);
+        roomRepository.save(room);
         bookingDetailsRepository.save(bookingDetails);
     }
 

@@ -1,7 +1,11 @@
 package org.backendprojectsst.hotelmanagementsystem.services.Customer;
 
+import org.backendprojectsst.hotelmanagementsystem.models.BookingDetails;
 import org.backendprojectsst.hotelmanagementsystem.models.Customer;
+import org.backendprojectsst.hotelmanagementsystem.models.Room;
+import org.backendprojectsst.hotelmanagementsystem.repositories.BookingDetailsRepository;
 import org.backendprojectsst.hotelmanagementsystem.repositories.CustomerRepository;
+import org.backendprojectsst.hotelmanagementsystem.repositories.RoomRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,9 +14,13 @@ import java.util.List;
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final RoomRepository roomRepository;
+    private final BookingDetailsRepository bookingDetailsRepository;
 
-    public CustomerServiceImpl(CustomerRepository customerRepository){
+    public CustomerServiceImpl(CustomerRepository customerRepository, RoomRepository roomRepository, BookingDetailsRepository bookingDetailsRepository) {
         this.customerRepository = customerRepository;
+        this.roomRepository = roomRepository;
+        this.bookingDetailsRepository = bookingDetailsRepository;
     }
 
     public Customer getCustomerById(Long customerId) {
@@ -44,6 +52,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     public Customer createCustomer(Customer customer) {
+        BookingDetails bookingDetails = customer.getBookingDetails();
+        Room room = customer.getRoom();
+        bookingDetailsRepository.save(bookingDetails);
+        roomRepository.save(room);
         return customerRepository.save(customer);
     }
 
@@ -53,6 +65,15 @@ public class CustomerServiceImpl implements CustomerService {
             existingCustomer.setName(updatedCustomer.getName());
             existingCustomer.setEmail(updatedCustomer.getEmail());
             return customerRepository.save(existingCustomer);
+        }
+        return null;
+    }
+
+    public Customer deleteCustomer(Long customerId) {
+        Customer customer = customerRepository.findById(customerId).orElse(null);
+        if (customer != null) {
+            customerRepository.delete(customer);
+            return customer;
         }
         return null;
     }

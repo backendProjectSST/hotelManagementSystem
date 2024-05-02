@@ -17,7 +17,6 @@ public class RoomController
 {
     private final RoomService roomService;
 
-    @Autowired
     private RoomController(RoomService roomService)
     {
         this.roomService = roomService;

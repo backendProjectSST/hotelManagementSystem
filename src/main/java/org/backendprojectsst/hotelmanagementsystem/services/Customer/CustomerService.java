@@ -26,4 +26,6 @@ public interface CustomerService {
     public Customer checkIn(Long customerId);
 
     public Customer checkOut(Long customerId);
+
+    Customer deleteCustomer(Long customerId);
 }

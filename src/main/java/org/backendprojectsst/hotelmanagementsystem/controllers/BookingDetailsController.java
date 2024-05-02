@@ -17,7 +17,6 @@ import java.util.List;
 public class BookingDetailsController {
     private final BookingDetailsService bookingDetailsService;
 
-    @Autowired
     public BookingDetailsController(BookingDetailsService bookingDetailsService) {
         this.bookingDetailsService = bookingDetailsService;
     }
@@ -83,9 +82,9 @@ public class BookingDetailsController {
         bookingDetailsService.addBookingDetails(bookingDetails);
     }
 
-    @PutMapping("/")
-    public void updateBookingDetails(@RequestBody BookingDetails bookingDetails) {
-        bookingDetailsService.updateBookingDetails(bookingDetails);
+    @PutMapping("/{id}")
+    public void updateBookingDetails(@PathVariable long id, @RequestBody BookingDetails bookingDetails) {
+        bookingDetailsService.updateBookingDetails(id, bookingDetails);
     }
 
     @DeleteMapping("/{bookingDetailsId}")
