@@ -1,24 +1,24 @@
 package org.backendprojectsst.hotelmanagementsystem.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data
 @Entity
 public class BookingDetails {
-    @Id()
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long bookingId;
     @ManyToOne
     private Customer customer;
     @ManyToOne
     private Room room;
-    private Date bookingDate;
-    private Date checkInTime;
-    private Date checkOutTime;
+    private LocalTime bookingTime;
+    private LocalDate checkInTime;
+    private LocalDate checkOutTime;
     private PaymentStatus paymentStatus;
 
 }
